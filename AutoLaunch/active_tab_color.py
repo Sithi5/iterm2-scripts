@@ -19,7 +19,8 @@ class TabColorManager:
             try:
                 await self.last_tab_session.async_set_profile_properties(self.change)
             except iterm2.RPCException:
-                print("Failed to set tab color for session: " + self.last_tab_session)
+                if self.last_tab_session is not None:
+                    print("Failed to set tab color for session: " + self.last_tab_session)
         self.last_tab_session = session
         self.change.set_tab_color(self.active_tab_color)
         await session.async_set_profile_properties(self.change)
